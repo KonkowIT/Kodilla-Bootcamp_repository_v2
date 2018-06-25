@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export CATALINA_HOME=/Users/konkow_macbook/Desktop
+export CATALINA_HOME=/Users/konkow_macbook/Documents/Programowanie
 
 stop_tomcat()
 {
