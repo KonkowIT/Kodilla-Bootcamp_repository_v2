@@ -1,14 +1,11 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.com.crud.tasks.service.DbService;
-import com.crud.tasks.domain.Task;
+import com.crud.tasks.service.DbService;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Id;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
