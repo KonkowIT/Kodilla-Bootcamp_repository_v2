@@ -18,19 +18,4 @@ public class ExtraTrelloCard {
     @JsonProperty("badges")
     private Badges badges;
 
-    @JsonProperty("votes")
-    private int votes;
-
-    @JsonProperty("attachments")
-    private AttachmentByType attachments;
-
-    @JsonProperty("trello")
-    private Trello trello;
-
-    @JsonProperty("board")
-    private int board;
-
-    @JsonProperty("card")
-    private int card;
-
 }

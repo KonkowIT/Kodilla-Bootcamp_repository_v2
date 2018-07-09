@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/v1/trello")
@@ -23,22 +24,12 @@ public class TrelloController {
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoard();
 
         trelloBoards.stream()
+                .filter(Objects::nonNull)
                 .filter(a -> a.getName().contains("Kodilla"))
                 .filter(b -> !(b.getName().isEmpty()))
                 .filter(c -> !(c.getId().isEmpty()))
                 .forEach(c -> System.out.println(c.getId() + " " + c.getName()));
 
-        // GET request
-        trelloBoards.forEach(trelloBoardDto -> {
-
-            System.out.println(trelloBoardDto.getName() + " - " + trelloBoardDto.getId());
-
-            System.out.println("This board contains lists: ");
-
-            trelloBoardDto.getLists().forEach(trelloList ->
-                    System.out.println(trelloList.getName() + " - " + trelloList.getId() + " - " + trelloList.getIsClosed()));
-
-        });
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTrelloCard")
