@@ -46,6 +46,9 @@ public class TrelloClientTest {
 
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoards);
 
+        when(trelloConfig.getTrelloUsername()).thenReturn("konradkowalski5");
+        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
+
         //when
         List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoard();
 
@@ -75,6 +78,8 @@ public class TrelloClientTest {
         );
 
         when(restTemplate.postForObject(uri, null, CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
+        when(trelloConfig.getTrelloUsername()).thenReturn("konradkowalski5");
+        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
 
         //when
         CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
@@ -93,6 +98,8 @@ public class TrelloClientTest {
 
         //when
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
+        when(trelloConfig.getTrelloUsername()).thenReturn("konradkowalski5");
+        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
 
         //then
         List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoard();
