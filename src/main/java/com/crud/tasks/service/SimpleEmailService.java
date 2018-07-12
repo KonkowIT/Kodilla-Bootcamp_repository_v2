@@ -31,15 +31,11 @@ public class SimpleEmailService {
 
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        if(mail.getToCc().isEmpty()) {
-            mailMessage.setTo(mail.getMailTo());
-            mailMessage.setSubject(mail.getSubject());
-            mailMessage.setText(mail.getSubject());
-            LOGGER.info("Carbon copy email address empty, sending email only to main address.");
-        } else {
-            mailMessage.setTo(mail.getMailTo());
-            mailMessage.setSubject(mail.getSubject());
-            mailMessage.setText(mail.getSubject());
+        mailMessage.setTo(mail.getMailTo());
+        mailMessage.setSubject(mail.getSubject());
+        mailMessage.setText(mail.getSubject());
+        LOGGER.info("Carbon copy email address empty, sending email only to main address.");
+        if(mail.getToCc() != null && !mail.getToCc().isEmpty()) {
             mailMessage.setCc(mail.getToCc());
             LOGGER.info("Sending email to main address. Sending Carbon copy to CC address.");
         }

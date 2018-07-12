@@ -26,14 +26,10 @@ public class SimpleEmailServiceTest {
         //Given
         Mail mail = new Mail("test@test.com", "test", "Test Message","");
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        if(mail.getToCc().isEmpty()) {
-            mailMessage.setTo(mail.getMailTo());
-            mailMessage.setSubject(mail.getSubject());
-            mailMessage.setText(mail.getSubject());
-        } else {
-            mailMessage.setTo(mail.getMailTo());
-            mailMessage.setSubject(mail.getSubject());
-            mailMessage.setText(mail.getSubject());
+        mailMessage.setTo(mail.getMailTo());
+        mailMessage.setSubject(mail.getSubject());
+        mailMessage.setText(mail.getSubject());
+        if(mail.getToCc() != null && !mail.getToCc().isEmpty()) {
             mailMessage.setCc(mail.getToCc());
         }
 
