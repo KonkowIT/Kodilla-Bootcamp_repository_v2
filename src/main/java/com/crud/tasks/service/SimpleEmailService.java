@@ -33,7 +33,7 @@ public class SimpleEmailService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mail.getSubject());
+        mailMessage.setText(mail.getMessage());
         LOGGER.info("Carbon copy email address empty, sending email only to main address.");
         if(mail.getToCc() != null && !mail.getToCc().isEmpty()) {
             mailMessage.setCc(mail.getToCc());
