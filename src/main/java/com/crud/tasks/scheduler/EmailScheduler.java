@@ -1,4 +1,4 @@
-package com.crud.tasks.com.crud.tasks.scheduler;
+package com.crud.tasks.scheduler;
 
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.Mail;
