@@ -21,7 +21,7 @@ public class TrelloValidator {
         }
     }
 
-    public List<TrelloBoard> calidateTrelloBoards(final List<TrelloBoard> trelloBoards) {
+    public List<TrelloBoard> validateTrelloBoards(final List<TrelloBoard> trelloBoards) {
         LOGGER.info("Staritng filetring boards...");
         List<TrelloBoard> filteredBoards = trelloBoards.stream()
                 .filter(trelloBoard -> !trelloBoard.getName().equalsIgnoreCase("test"))

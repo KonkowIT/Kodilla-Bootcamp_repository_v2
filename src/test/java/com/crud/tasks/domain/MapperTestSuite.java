@@ -1,6 +1,10 @@
 package com.crud.tasks.domain;
 
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +12,18 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+@Ignore
+@RunWith(SpringRunner.class)
 public class MapperTestSuite {
+
+    @Autowired
+    private TrelloMapper mapper;
+
     @Test
     public void testMapToBoards() {
         //given
         List<TrelloBoardDto> trelloBoardDto = new ArrayList<>();
         List<TrelloListDto> trelloListDto = new ArrayList<>();
-        TrelloMapper mapper = new TrelloMapper();
         trelloBoardDto.add(new TrelloBoardDto("test_board_id", "test_board_name", trelloListDto));
         trelloListDto.add(new TrelloListDto("test_list_id", "test_list_name", false));
 
@@ -34,7 +43,6 @@ public class MapperTestSuite {
         List<TrelloList> trelloList = new ArrayList<>();
         trelloBoards.add(new TrelloBoard("test_board_id", "test_board_name", trelloList));
         trelloList.add(new TrelloList("test_list_id", "test_list_name", false));
-        TrelloMapper mapper = new TrelloMapper();
 
         //when
         List<TrelloBoardDto> result = mapper.mapToBoardsDto(trelloBoards);
@@ -50,7 +58,6 @@ public class MapperTestSuite {
         //given
         List<TrelloListDto> trelloListDto = new ArrayList<>();
         trelloListDto.add(new TrelloListDto("test_list_id", "test_list_name", false));
-        TrelloMapper mapper = new TrelloMapper();
 
         //when
         List<TrelloList> result = mapper.mapToList(trelloListDto);
@@ -66,7 +73,6 @@ public class MapperTestSuite {
         //given
         List<TrelloList> trelloList = new ArrayList<>();
         trelloList.add(new TrelloList("test_list_id", "test_list_name", false));
-        TrelloMapper mapper = new TrelloMapper();
 
         //when
         List<TrelloListDto> result = mapper.mapToListDto(trelloList);
@@ -82,7 +88,6 @@ public class MapperTestSuite {
         //given
         TrelloCard trelloCard = new TrelloCard("trello_card_name", "trello_card_description",
                 "trello_card_pos", "trello_card_listId");
-        TrelloMapper mapper = new TrelloMapper();
 
         //when
         TrelloCardDto result = mapper.mapToCardDto(trelloCard);
@@ -99,7 +104,6 @@ public class MapperTestSuite {
         //given
         TrelloCardDto trelloCardDto = new TrelloCardDto("trello_card_name", "trello_card_description",
                 "trello_card_pos", "trello_card_listId");
-        TrelloMapper mapper = new TrelloMapper();
 
         //when
         TrelloCard result = mapper.mapToCard(trelloCardDto);
