@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -14,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.Mockito.doNothing;
@@ -30,8 +30,7 @@ public class TaskControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private TaskController taskController;
+    TaskController taskController;
 
     @Test
     public void getTasksTest() throws Exception {
@@ -56,7 +55,6 @@ public class TaskControllerTest {
         TaskDto taskDto = new TaskDto(1L, "test title", "test content");
 
         when(taskController.getTask(taskDto.getId())).thenReturn(taskDto);
-            //nie jestem pewien czy tu powinno być tak, czy podana od razu wartość 1L ?
 
         //when & then
         mockMvc.perform(get("/v1/task/getTask").contentType(MediaType.APPLICATION_JSON)
@@ -84,7 +82,6 @@ public class TaskControllerTest {
     public void createTaskTest() throws Exception {
         //given
         TaskDto taskDto = new TaskDto(1L, "test title", "test content");
-        List<TaskDto> taskDtoList = new ArrayList<>();
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
 
@@ -92,10 +89,8 @@ public class TaskControllerTest {
         mockMvc.perform(post("/v1/taks/createTask").contentType(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .content(jsonContent))
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("test title")))
-                .andExpect(jsonPath("$.content", is("test content")));
+                .content(jsonContent));
+        assertTrue(taskController.isWasCalled());
     }
 
     @Test
@@ -111,9 +106,7 @@ public class TaskControllerTest {
         mockMvc.perform(put("/v1/task/updateTask").contentType(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .content(jsonContent))
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("test title after update")))
-                .andExpect(jsonPath("$.content", is("test content after update")));
+                .content(jsonContent));
+        assertTrue(taskController.isWasCalled());
     }
 }
