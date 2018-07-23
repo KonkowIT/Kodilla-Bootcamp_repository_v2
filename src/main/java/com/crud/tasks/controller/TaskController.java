@@ -19,8 +19,6 @@ public class TaskController {
     @Autowired
     private TaskMapper taskMapper;
 
-    private boolean wasCalled = false;
-
     @RequestMapping(method = RequestMethod.GET, value = "getTasks")
     public List<TaskDto> getTasks() {
         return taskMapper.mapToTaskDtoList(service.getAllTasks());
@@ -39,16 +37,10 @@ public class TaskController {
     @RequestMapping(method = RequestMethod.POST, value = "createTask", consumes = APPLICATION_JSON_VALUE)
     public void createTask(@RequestBody TaskDto taskDto){
         service.saveTask(taskMapper.mapToTask(taskDto));
-        wasCalled = true;
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
     public TaskDto updateTask(@RequestBody TaskDto taskDto){
-        wasCalled = true;
         return taskMapper.mapToTaskDto(service.saveTask(taskMapper.mapToTask(taskDto)));
-    }
-
-    public boolean isWasCalled() {
-        return wasCalled;
     }
 }
